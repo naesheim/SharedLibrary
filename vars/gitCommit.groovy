@@ -1,3 +1,4 @@
 def call(){
-	echo "$(git log -1 --pretty=%B)"
+	def commit = sh(returnStdout: true,  script: 'git log --online').trim()
+    echo ${commit}
 }
