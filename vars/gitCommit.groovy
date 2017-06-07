@@ -7,7 +7,9 @@ def call(){
     String keys = "|".join(keywords).toLower()
     def finder = (commit =~ /($keys)\s+\d+/i)
     if (finder.size() != 0) {
-        workItemList.add((finder.getAt(0)))
+        println(finder.getAt(0))
     }
-    println workItemList
+    else{
+        println("no work item found")
+    }
 }
