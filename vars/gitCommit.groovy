@@ -5,7 +5,7 @@ def call(){
     def workItemList = []
 
     String keys = "|".join(keywords).toLower()
-    def finder = (commit =~ /($keys)\s+\d+/i)
+    def finder = (commit =~ /($keys)\s+\d+/)
     if (finder.size() != 0) {
         println(finder.getAt(0))
     }
