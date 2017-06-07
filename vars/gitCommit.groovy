@@ -1,6 +1,6 @@
 def call(){
-    def keywords = ['wi', 'work-item',]
-	def commit = sh(returnStdout: true,  script: 'git log -1 --pretty=%B').trim().toLower()
+    def keywords = ['wi', 'work-item']
+	def commit = sh(returnStdout: true,  script: 'git log -1 --pretty=%B').trim().toLowerCase()
 
     def workItemList = []
 
