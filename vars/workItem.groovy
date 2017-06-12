@@ -1,11 +1,9 @@
-class workItem implements serializable {
-    private String name
-
-    def setName(value){
-            name = (name == null) ? value : name + '|' + value
+@NonCPS
+def call(String data = "wi 492340"){
+    def finder = (data =~ /[0-9]{5}/)
+    def arr = []
+    finder.each { number ->
+        arr.add(number)
     }
-
-    def getName(){
-        name
-    }
+    return arr.join('|')
 }
