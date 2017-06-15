@@ -1,9 +1,11 @@
 @NonCPS
 def call(String data = "wi 492340"){
-    def finder = (data =~ /(wi|work-item)\s+\d{5}/)
+    def keywords = ['bug', 'wi', 'work-item','task']
+    def search = keywords.join('|')
+    def finder = (data =~ /($search)\s+(\d+)/)
     def arr = []
     finder.each { number ->
-        arr.add(number)
+        arr.add(number.getAt(2))
     }
     return arr.join('|')
 }
