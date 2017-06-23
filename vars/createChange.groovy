@@ -1,3 +1,5 @@
+import static no.moller.WorkItem.*
+
 def call(String applicationName){
     WORK_ITEM = null
     APPLICATION_NAME = applicationName
@@ -10,7 +12,7 @@ def call(String applicationName){
                 echo "uname $USERNAME pwd=$PASSWORD"
                 checkout scm
                 GIT_COMMIT = sh(returnStdout: true, script: 'git log -1 --pretty=%B')
-                WORK_ITEM = workItem(GIT_COMMIT)
+                WORK_ITEM = getWorkItem(this, GIT_COMMIT)
             }
 
             stage('commit change') {
