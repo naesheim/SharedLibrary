@@ -9,14 +9,12 @@ def call(String applicationName){
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'pythonpass',
         usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
             stage('extract work items') {
-                echo "uname $USERNAME pwd=$PASSWORD"
                 checkout scm
-                GIT_COMMIT = sh(returnStdout: true, script: 'git log -1 --pretty=%B')
-                WORK_ITEM = getWorkItem(this, GIT_COMMIT)
+                WORK_ITEM = getWorkItem(this)
             }
 
             stage('commit change') {
-                git branch: 'master', credentialsId: '2d7f1202-2262-4dc2-b9f8-30744ba7688d', url: CHANGE_REPO_URL
+                git branch: 'master', credentialsId: '01f6690e-ef95-4a99-a882-c140e863c6db', url: CHANGE_REPO_URL
                 sh 'python3 -m venv venv'
                 sh "venv/bin/pip3 install -r requirements.txt"
                 echo "work iteks: $WORK_ITEM and applicationName: $APPLICATION_NAME"
