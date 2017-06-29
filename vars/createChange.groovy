@@ -17,7 +17,7 @@ def call(String applicationName){
                 sh 'python3 -m venv venv'
                 sh "venv/bin/pip3 install -r requirements.txt"
                 echo "work items: $WORK_ITEM and applicationName: $APPLICATION_NAME"
-                sh "${echo items:${WORK_ITEM}}"
+                sh "work items ${WORK_ITEMS.join(' ')}"
             }
         }
     }
