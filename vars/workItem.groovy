@@ -7,5 +7,5 @@ def call(String data = "wi 492340"){
     finder.each { number ->
         arr.add(number.getAt(2))
     }
-    return arr.join('|')
+    return arr
 }
