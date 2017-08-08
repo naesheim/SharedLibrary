@@ -1,6 +1,7 @@
 def call(
 	String module
 ) {
+	pipeline {
 		stages {
 			stage('Build & Upload') {
 				agent any
