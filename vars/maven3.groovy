@@ -1,24 +1,6 @@
-
-/**
- * Standard Java 1.8 pipeline for Jetty modules.
- *
- * // TODO EXPLAIN STEPS
- *
- * @param module		name of the module to deploy (Must be identical to the module health check string)
- * @param contextPath	the context path of the module, such as "MyModuleEndpoint/api"
- * @param serverGroup	map of serves to deploy the module to, such as "MnetApi"
- * @param artifactId	optional if the artifactId in pom is not correct
- */
 def call(
 	String module
 ) {
-	pipeline {
-		agent none
-		options {
-			// timestamps()
-			skipDefaultCheckout()
-			timeout(time: 1, unit: 'DAYS')
-		}
 		stages {
 			stage('Build & Upload') {
 				agent any
