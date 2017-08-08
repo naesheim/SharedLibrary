@@ -3,6 +3,12 @@ def call(String module) {
 	    agent any
 		stages {
 			stage('Build & Upload') {
+				when {
+					allOf {
+						branch 'master'
+						expression { "a" == "a" }
+					}
+				}
 				steps {
 					echo '\n\nBuilding...\n'
 				}
