@@ -1,47 +1,39 @@
-def call(
-	String module
-) {
+def call(String module) {
 	pipeline {
+	    agent any
 		stages {
 			stage('Build & Upload') {
-				agent any
 				steps {
 					echo '\n\nBuilding...\n'
 				}
 			}
 			stage('Deploy to DEV') {
-				agent any
 				steps {
 					echo '\n\nDEV deploy...\n'
 				}
 			}
 			stage('Integration Tests') {
-				agent any
 				steps {
 					echo '\n\nIntegration tests...\n'
 				}
 			}
 			stage('SonarQube') {
-				agent any
 				steps {
 					echo '\n\nSonarQube...\n'
 				}
 			}
 			stage('TEST deploy?') {
-				agent none
 				steps {
 					input "Deploy to TEST?"
 				}
 			}
 			stage('Deploy to TEST') {
-				agent any
 				steps {
 					// deploy(this, 'TEST', buildData)
 					echo '\n\nTEST deploy...\n'
 				}
 			}
 			stage('Finish if not on on master-branch'){
-				agent none
 				when{
 					not {branch 'development'}
 				}
@@ -57,14 +49,12 @@ def call(
 				}
 			}
 			stage('STAGING deploy?') {
-				agent none
 				when {
-					branch 'development'
+					branch 'moller'
 				}
 				steps {input "Deploy to STAGING?"}
 			}
 			stage('Deploy to STAGING') {
-				agent {label 'linux'}
 				when {
 					branch 'development'
 				}
@@ -74,7 +64,6 @@ def call(
 				}
 			}
 			stage('PRODUCTION deploy?') {
-				agent none
 				when {
 					branch 'development'
 				}
@@ -83,9 +72,8 @@ def call(
 				}
 			}
 			stage('Deploy to PRODUCTION') {
-				agent any
 				when {
-					branch 'development'
+					expression {return false}
 				}
 				steps {
 					// deploy(this, 'PRODUCTION', buildData)
